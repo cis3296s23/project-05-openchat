@@ -1,13 +1,14 @@
 // A Java program for a Client
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.TimeUnit;
  
 public class Client {
     // initialize socket and input output streams
     private Socket socket = null;
     private DataInputStream input = null;
     private DataOutputStream out = null;
- 
+    private int ClientId;
     // constructor to put ip address and port
     public Client(String address, int port)
     {
@@ -57,8 +58,8 @@ public class Client {
         }
     }
  
-    public static void main(String args[])
-    {
+    public static void main(String args[]) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
         Client client = new Client("127.0.0.1", 5000);
     }
 }
