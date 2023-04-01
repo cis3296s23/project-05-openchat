@@ -1,6 +1,6 @@
 # OpenChat
 
-#Vision Statement
+# Vision Statement
 This project is FOR individuals seeking to connect through real-time text based chatting software. WHO want 
 the availability of communicating through standard chatting practices but also enhancing the workflow of developers.
 THE OpenChat application is a software based application THAT allows the accessablity of editing code and communicating remotely.
