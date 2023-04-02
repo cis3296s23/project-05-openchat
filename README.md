@@ -8,22 +8,21 @@ UNLIKE other applications OUR PRODUCT will remain light-weight and easy to use t
 making communication more effective and productive.
 
 
-Put here a short paragraph describing your project. 
-Adding an screenshot or a mockup of your application in action would be nice.  
+# Project Description
+OpenChat is a real-time chatting software that allows users to connect and interact with each other effectively and efficiently.
+This project utilzes Java Sockets to allow for this connection between users. Our goal is not only a chatting application but
+rather a chatting application that improves the lives of employees at the work place. We are doing this by adding features such 
+as, editing code snippets inside the chat message in real-time. 
 
-![This is a screenshot.](images.png)
+![image](https://user-images.githubusercontent.com/89660661/229372009-312297dc-d0c3-4e5c-a06c-ae6525c91533.png)
+
 # How to run
-Provide here instructions on how to use your application.   
-- Download the latest binary from the Release section on the right on GitHub.  
-- On the command line uncompress using
-```
-tar -xzf  
-```
-- On the command line run with
-```
-./hello
-```
-- You will see Hello World! on your terminal. 
+Currently, the installation of this application is very simple.
+  - First fork / clone the repo to your local Java IDE (Preferrably Intellij)
+  - Once you have access to all the files you can then simply run (main) the server first (This is done since client will terminate without a server connection available)
+  - Then run the main method of the client file
+  - You can now check your terminal at the bottom of your screen, you should see two terminals (Server, Client)
+  - Once this is established you can simply type messages back and forth to Server & Client (String "Over" ends the process)
 
 # How to contribute
 Follow this project board to know the latest status of the project: [http://...]([http://...])  
