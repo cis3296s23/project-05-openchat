@@ -37,7 +37,7 @@ public class Client {
         String line = "";
  
         // keep reading until "Over" is input
-        while (!line.equals("Over")) {
+       /* while (!line.equals("Over")) {
             try {
                 line = input.readLine();
                 out.writeUTF(line);
@@ -55,7 +55,7 @@ public class Client {
         }
         catch (IOException i) {
             System.out.println(i);
-        }
+        }*/
     }
  
     public static void main(String args[]) throws InterruptedException {
