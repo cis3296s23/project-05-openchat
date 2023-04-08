@@ -1,6 +1,7 @@
 // A Java program for a Server
 import java.net.*;
 import java.io.*;
+import java.util.HashMap;
 
 public class Server extends Thread
 {
@@ -10,13 +11,16 @@ public class Server extends Thread
 	private DataInputStream in	 = null;
 	private int serverPort;
 	public boolean ServerOpen = false;
+	public static Server ThisServer;
 	private Client[] ConnectedClients;
+	private HashMap<Integer,MessageRoom> messageRooms;
 	// constructor with port
 	public Server(int port)
 	{
 		// starts server and waits for a connection
 		ServerOpen = true;
 		serverPort = port;
+		ThisServer = this;
 	}
 
 	public boolean isClientConnected(String clientAddress){
@@ -51,6 +55,30 @@ public class Server extends Thread
 			System.out.println(i);
 		}
 	}
+
+	public int createChatRoom(){
+
+		MessageRoom createdRoom = new MessageRoom();
+		messageRooms.put(createdRoom.roomId,createdRoom);
+		System.out.println("room created");
+		return createdRoom.roomId;
+	};
+
+
+	public boolean requestConnection(int requesterId, int[] clientIds){
+		boolean success = false;
+
+
+		return success;
+	}
+
+	public void sendMessageToRoom(int roomId,int clientId,String message){
+		Message messageObject = new Message(message,clientId);
+		MessageRoom targetRoom = messageRooms.get(roomId);
+		System.out.println("Sending message: ' " + messageObject.messageBody + " '.");
+
+	}
+
 
 	private void handleConnection(Socket socket) {
 		try {

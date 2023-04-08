@@ -9,14 +9,20 @@ public class Client {
     private DataInputStream input = null;
     private DataOutputStream out = null;
     private int ClientId;
+    private static int currentclients = 0;
+    private Server ServerOwner;
     // constructor to put ip address and port
     public Client(String address, int port)
     {
+        ClientId = currentclients; //Each client has a unique incremental Idw
+        currentclients++;
+        ServerOwner = Server.ThisServer;
         // establish a connection
+        System.out.println("current clientid:  " + ClientId );
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
- 
+
             // takes input from terminal
             input = new DataInputStream(System.in);
  
@@ -57,7 +63,12 @@ public class Client {
             System.out.println(i);
         }*/
     }
- 
+
+    public void requestGroup(int[] targetids){
+       // ServerOwner.requestConnection(ClientId,targetids);
+        ServerOwner.createChatRoom();
+    }
+
     public static void main(String args[]) throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
         Client client = new Client("127.0.0.1", 5000);
