@@ -35,10 +35,10 @@ Follow this project board to know the latest status of the project: [http://...]
 - What file and target to compile and run. 
 - What is expected to happen when the app start. 
 
-#UML Diagram
+# UML Diagram
+<img width="986" alt="Screenshot 2023-04-10 at 12 41 34 PM" src="https://user-images.githubusercontent.com/60800202/230953823-0fa44d56-f3b6-40e4-b183-e7c0455538ed.png">
 
-
-###Description
+### Description
 This is the UML class diagram for this project. The chat software is focused mainly in the chat controller. 
 Chat controller is what allows the entire project to run. It uses chat view and chat model in an association model that is one to one. 
 Chat view sets up the front end user interface through building a Graphic User Interface with Java Swing and is called once for every call of chat controller.
