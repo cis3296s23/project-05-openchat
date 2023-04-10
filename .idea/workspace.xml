@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="675df1c6-d34c-4d79-9aaa-12513be5d9d9" name="Changes" comment="New versioned files">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
+    <list default="true" id="675df1c6-d34c-4d79-9aaa-12513be5d9d9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController$SendButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController$SendButtonListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +56,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="Client" />
-      <module name="Final" />
+      <module name="project-05-openchat" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -89,8 +86,8 @@
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.Server" />
       <item itemvalue="Application.Client" />
-      <item itemvalue="Compound.BothRun" />
       <item itemvalue="Application.ChatController" />
+      <item itemvalue="Compound.BothRun" />
     </list>
     <recent_temporary>
       <list>
@@ -127,6 +124,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New versioned files" />
