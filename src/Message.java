@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.time.*;
 
@@ -7,7 +8,10 @@ public class Message {
     long timeOfInitialSend;
     long lastEdit;
     ArrayList editHistory;
-    public Message(String baseMessage){
+    private String userName;
+
+    public Message(String baseMessage, String userName){
+        this.userName = userName;
         timeOfInitialSend = Instant.EPOCH.toEpochMilli();
         messageBody = baseMessage;
     }
@@ -19,6 +23,20 @@ public class Message {
         messageBody = newMessage;
     }
 
+    public String setMessage(String text){
+        messageBody = text;
+        return messageBody;
+    }
 
+    public String getDate(){
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(date);
+    }
+
+    @Override
+    public String toString(){
+        return String.format("[%s]\n%s: %s\n", getDate(), userName, messageBody);
+    }
 
 }
