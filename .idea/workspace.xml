@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="675df1c6-d34c-4d79-9aaa-12513be5d9d9" name="Changes" comment="New versioned files">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController$SendButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController$SendButtonListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$ClientHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$ClientHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
