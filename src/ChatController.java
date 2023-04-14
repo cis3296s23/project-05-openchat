@@ -35,7 +35,7 @@ public class ChatController {
     }
 
     public static void main(String[] args) throws IOException {
-        ChatModel model = new ChatModel(5000, 2);
+        ChatModel model = new ChatModel(888, 2);
         ChatView view = new ChatView();
         ChatController controller = new ChatController(view, model);
 
