@@ -9,11 +9,13 @@ public class Message {
     long lastEdit;
     ArrayList editHistory;
     private String userName;
+    int sender;
 
-    public Message(String baseMessage, String userName){
+    public Message(String baseMessage, int sender, String userName){
         this.userName = userName;
         timeOfInitialSend = Instant.EPOCH.toEpochMilli();
         messageBody = baseMessage;
+        this.sender = sender;
     }
 
     public void EditMessage(String newMessage){

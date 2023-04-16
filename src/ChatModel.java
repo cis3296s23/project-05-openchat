@@ -1,93 +1,69 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ChatModel {
-    private ServerSocket server;
-    private List<Socket> clients;
-    private List<PrintWriter> writers;
+    private List<Client> clients;
     private int port;
     private int maxClients;
     private int numClients;
 
     public ChatModel(int port, int maxClients) throws IOException {
         this.port = port;
-        server = new ServerSocket(port);
         clients = new ArrayList<>();
-        writers = new ArrayList<>();
         this.maxClients = maxClients;
         this.numClients = 0;
     }
 
-    @SuppressWarnings("InfiniteLoopStatement")
-    public void getConnections() throws IOException {
+    public void startServer() {
+        Server server = new Server(port);
 
-        while(true){
-            Socket clientSocket = server.accept();
-
-            if(numClients > maxClients){
-                // Reject the connection if the maximum number of clients is reached
-                PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
-                writer.println("The server has reached its maximum capacity.");
-                writer.flush();
-                clientSocket.close();
-            }else{
-                clients.add(clientSocket);
-                numClients++;
-                Thread thread = new Thread(new ClientHandler(clientSocket));
-                thread.start();
-            }
-        }
+        Thread thread = new Thread(() -> {
+            server.startServer();
+        });
+        thread.start();
+        //server.connectedClients.add(client_1);
     }
 
+    public void startClient(){
+        ChatView view = new ChatView();
+        view.addSendButtonListener(new SendButtonListener(view));
+        Client client = new Client("127.0.0.1", port, view);
 
-    public void sendMessage(String msg){
-        for(PrintWriter writer : writers){
-            writer.println(msg);
-            writer.flush();
-        }
+        Thread Cthread = new Thread(() ->{
+            client.newConnection();
+        });
+        Cthread.start();
+
+        ChatView view2 = new ChatView();
+        view2.addSendButtonListener(new SendButtonListener(view2));
+        Client client_2 = new Client("127.0.0.1", port, view2);
+
+        Thread C_2thread = new Thread(() ->{
+            client_2.newConnection();
+        });
+        C_2thread.start();
+
     }
 
-    private class ClientHandler implements Runnable{
-        private Socket client;
-        private BufferedReader reader;
-        private PrintWriter writer;
-
-        public ClientHandler(Socket client) throws IOException {
-            this.client = client;
-            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            writer = new PrintWriter(client.getOutputStream(), true);
-            writers.add(writer);
+    private class SendButtonListener implements ActionListener {
+        public ChatView view;
+        public SendButtonListener(ChatView view){
+            this.view = view;
         }
 
         @Override
-        public void run() {
-            try{
-                while(true){
-                    String msg = reader.readLine();
-
-                    // If client disconnected then remove it
-                    if(msg == null){
-                        clients.remove(client);
-                        writers.remove(writer);
-                        numClients--;
-                        break;
-                    }
-
-                    // Send message to all clients
-                    for(PrintWriter writer : writers){
-                        if(writer != this.writer){
-                            writer.println(msg);
-                            writer.flush();
-                        }
-                    }
-
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        public void actionPerformed(ActionEvent e) {
+            String input = view.getInputText();
+            // Update the view
+            view.appendMessage(input);
+            view.sentText = input;
+            view.clearInputText();
         }
     }
 
