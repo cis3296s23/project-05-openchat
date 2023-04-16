@@ -21,6 +21,7 @@ public class Server extends Thread
 		ServerOpen = true;
 		serverPort = port;
 		ThisServer = this;
+		messageRooms = new HashMap<Integer,MessageRoom>();
 	}
 
 	public boolean isClientConnected(String clientAddress){
@@ -31,7 +32,15 @@ public class Server extends Thread
 
 	public void run() {
 		try {
-			server = new ServerSocket(serverPort);
+
+			String publicIp = "73.13.147.135"; // replace with your public IP address
+			int port = 25565; // replace with the port you want to listen on
+			InetAddress addr = Inet4Address.getByName(publicIp);
+			System.out.println("Server socket listening on " + InetAddress.getLocalHost().getHostAddress() + ":" + port + addr.isReachable(5) );
+
+			ServerSocket server = new ServerSocket(port);//, 0, addr);
+
+			//server = new ServerSocket(serverPort);
 			System.out.println("Server started");
 
 			while (ServerOpen) {

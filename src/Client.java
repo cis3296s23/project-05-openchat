@@ -11,6 +11,7 @@ public class Client {
     private int ClientId;
     private static int currentclients = 0;
     private Server ServerOwner;
+    private int currentTargetGroup;
     // constructor to put ip address and port
     public Client(String address, int port)
     {
@@ -66,11 +67,16 @@ public class Client {
 
     public void requestGroup(int[] targetids){
        // ServerOwner.requestConnection(ClientId,targetids);
-        ServerOwner.createChatRoom();
+        int groupId = ServerOwner.createChatRoom();
+        currentTargetGroup = groupId;
+    }
+
+    public void sendMessage(int groupId){
+
     }
 
     public static void main(String args[]) throws InterruptedException {
         TimeUnit.SECONDS.sleep(2);
-        Client client = new Client("127.0.0.1", 5000);
+        Client client = new Client("localhost", 5000);
     }
 }
