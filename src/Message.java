@@ -7,9 +7,11 @@ public class Message {
     long timeOfInitialSend;
     long lastEdit;
     ArrayList editHistory;
-    public Message(String baseMessage){
+    int sender;
+    public Message(String baseMessage,int sentby){
         timeOfInitialSend = Instant.EPOCH.toEpochMilli();
         messageBody = baseMessage;
+        sender = sentby;
     }
 
     public void EditMessage(String newMessage){
