@@ -1,7 +1,10 @@
 // A Java program for a Server
+
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class Server extends Thread
 {
@@ -10,18 +13,16 @@ public class Server extends Thread
 	private ServerSocket server = null;
 	private DataInputStream in	 = null;
 	private int serverPort;
-	public boolean ServerOpen = false;
+	public static boolean ServerOpen = false;
 	public static Server ThisServer;
-	private Client[] ConnectedClients;
-	private HashMap<Integer,MessageRoom> messageRooms;
+	private static final HashMap<String,Socket> ConnectedClients = new HashMap<>();
+	static final HashMap<Integer,MessageRoom> messageRooms = new HashMap<Integer,MessageRoom>();
 	// constructor with port
 	public Server(int port)
 	{
 		// starts server and waits for a connection
 		ServerOpen = true;
 		serverPort = port;
-		ThisServer = this;
-		messageRooms = new HashMap<Integer,MessageRoom>();
 	}
 
 	public boolean isClientConnected(String clientAddress){
@@ -36,7 +37,7 @@ public class Server extends Thread
 			String publicIp = "localhost"; // replace with your public IP address
 			int port = 25565; // replace with the port you want to listen on
 			InetAddress addr = Inet4Address.getByName(publicIp);
-			System.out.println("Server socket listening on " + InetAddress.getLocalHost().getHostAddress() + ":" + port + addr.isReachable(5) );
+			System.out.println("Server socket listening on " + InetAddress.getLocalHost().getHostAddress() + ":" + port + "Reachable?:" + addr.isReachable(5) );
 
 			ServerSocket server = new ServerSocket(port);//, 0, addr);
 
@@ -47,7 +48,11 @@ public class Server extends Thread
 				System.out.println("Waiting for a client ...");
 
 				socket = server.accept();
-				System.out.println("Client accepted");
+				ConnectedClients.put(UUID.randomUUID().toString(),socket);
+
+				updateClientList();
+
+				//System.out.println("Client accepted. Current Connected Clients: " + ConnectedClients.toString());
 				Thread t = new Thread(new Runnable() {
 					public void run() {
 						try{
@@ -65,11 +70,28 @@ public class Server extends Thread
 		}
 	}
 
-	public int createChatRoom(){
+	public static void updateClientList() throws IOException {
+		ArrayList<Serializable> clientMap = new ArrayList<>();
+
+		for(String ID: ConnectedClients.keySet()){
+			Socket socket = ConnectedClients.get(ID);
+			clientMap.add(new SerializableSocketAddress((InetSocketAddress)socket.getLocalSocketAddress(),ID));
+		}
+
+		for(String ID: ConnectedClients.keySet()){
+			Socket socket = ConnectedClients.get(ID);
+			ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+			oos.writeObject(clientMap);
+			//oos.close();
+		}
+	}
+
+
+	public static int createChatRoom(){
 
 		MessageRoom createdRoom = new MessageRoom();
 		messageRooms.put(createdRoom.roomId,createdRoom);
-		System.out.println("room created");
+		System.out.println("room created" + messageRooms.toString());
 		return createdRoom.roomId;
 	};
 
@@ -81,17 +103,36 @@ public class Server extends Thread
 		return success;
 	}
 
-	public void sendMessageToRoom(int roomId,int clientId,String message){
+	public static void sendMessageToRoom(int roomId,int clientId,String message){
 		Message messageObject = new Message(message,clientId);
 		MessageRoom targetRoom = messageRooms.get(roomId);
-		System.out.println("Sending message: ' " + messageObject.messageBody + " '.");
+		System.out.println("Sending message: '" + messageObject.messageBody + "'. to " + messageRooms.toString());
+		if(targetRoom == null){
+			System.out.println("Failed to access null room");
+			return;
+		}
+		targetRoom.messageStack.add(messageObject);
+		System.out.println(roomId + "Current stack:" + targetRoom.messageStack.toString());
 
 	}
 
 
+	private static boolean processCommand(String commandLine){
+		boolean commandProccessed = false;
+		//System.out.println("processing-'" +commandLine.toCharArray().toString() );
+		if(commandLine.equals("--CreateRoom")){
+			System.out.println("Creating room");
+			commandProccessed = true;
+			createChatRoom();
+		};
+
+		return commandProccessed;
+	};
+
 	private void handleConnection(Socket socket) {
 		try {
 			// takes input from the client socket
+			//System.out.println("Handling the req");
 			in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 
 			String line = "";
@@ -100,6 +141,11 @@ public class Server extends Thread
 			while (!line.equals("Over")) {
 				try {
 					line = in.readUTF();
+					if(!processCommand(line)){
+						sendMessageToRoom(0,0, line);
+
+					}
+
 					System.out.println(line);
 				} catch (IOException i) {
 					System.out.println(i);
@@ -114,9 +160,15 @@ public class Server extends Thread
 		}
 	}
 
-	public static void main(String args[])
-	{
-
+	public static void main(String args[]) {
+		Server thread = new Server(25565);
+		ThisServer = thread;
+		//thread.start();
+		Server.ThisServer.start();
+		Server.ThisServer.messageRooms.get(1);
+		while(thread.ServerOpen){
+			//await input
+		}
 
 	}
 }
