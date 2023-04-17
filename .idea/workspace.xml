@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="675df1c6-d34c-4d79-9aaa-12513be5d9d9" name="Changes" comment="New project structure and GUI views added. Need to properly connect the views with each client socket.">
+    <list default="true" id="d76811aa-059a-43aa-881b-0a69f6473c78" name="Changes" comment="Bug fixes and new implementations added. The project now has the ability to connect multiple clients and show each client's corresponding GUI">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController$SendButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$ClientHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$SendButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$SendButtonListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,10 +37,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+      </list>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2NvXGYhaVzBrzAUjiJbmoCmGlHz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

@@ -56,11 +56,13 @@ public class ChatView extends JFrame implements ItemListener {
         frame.add(buttonsPanel, BorderLayout.SOUTH);
         //frame.add(send, BorderLayout.SOUTH);
         frame.pack();
+
+
     }
 
     // Update GUI text area
     public void appendMessage(String message){
-        Message msg = new Message(message, 0,"Me");
+        Message msg = new Message(message,0, "Me");
         textArea.append(msg.toString());
     }
 

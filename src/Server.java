@@ -13,7 +13,7 @@ public class Server extends Thread
 	private int serverPort;
 	public boolean ServerOpen = false;
 	public static Server ThisServer;
-	public List<Client> connectedClients;
+	public List<Socket> connectedClients;
 	private HashMap<Integer,MessageRoom> messageRooms;
 	// constructor with port
 	public Server(int port)
@@ -41,6 +41,7 @@ public class Server extends Thread
 				System.out.println("Waiting for a client ...");
 
 				socket = server.accept();
+				connectedClients.add(socket);
 				System.out.println("Client accepted");
 				Thread t = new Thread(() -> {
 					try{
@@ -92,6 +93,15 @@ public class Server extends Thread
 					// TODO relay messages to clients from the client list
 					line = in.readUTF();
 					System.out.println("Server: " + line + " THREAD_ID: " + currentThread());
+
+					// Send message to all other connected clients
+					for(Socket client : connectedClients){
+						if(client != socket){
+							DataOutputStream out = new DataOutputStream(client.getOutputStream());
+							out.writeUTF(line);
+							out.flush();
+						}
+					}
 				} catch (IOException i) {
 					System.out.println(i);
 				}

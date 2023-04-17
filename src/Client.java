@@ -7,6 +7,7 @@ public class Client {
     // initialize socket and input output streams
     private Socket socket = null;
     private DataOutputStream out = null;
+    private DataInputStream in = null;
     private int ClientId;
     private static int currentclients = 0;
     private Server ServerOwner;
@@ -46,10 +47,10 @@ public class Client {
                     view.sentText = "";
                 }
                 // read input from the server
-                DataInputStream in = new DataInputStream(socket.getInputStream());
+                in = new DataInputStream(socket.getInputStream());
                 if (in.available() > 0) {
                     Message response = new Message(in.readUTF(), 1, "Server");
-                    view.appendMessage(response + "\n");
+                    view.appendMessage(response.toString());
                 }
 
                 // wait a short amount of time before checking again
