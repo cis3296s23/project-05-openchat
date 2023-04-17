@@ -11,6 +11,7 @@ public class ChatView extends JFrame implements ItemListener {
     private final JButton send = new JButton("Send");
     private final JTextField typeBar = new JTextField(50);
     private final JTextArea textArea = new JTextArea(15, 25);
+    public String sentText = "";
 
 
     public ChatView(){
@@ -55,13 +56,11 @@ public class ChatView extends JFrame implements ItemListener {
         frame.add(buttonsPanel, BorderLayout.SOUTH);
         //frame.add(send, BorderLayout.SOUTH);
         frame.pack();
-
-
     }
 
     // Update GUI text area
     public void appendMessage(String message){
-        Message msg = new Message(message, "Me");
+        Message msg = new Message(message, 0,"Me");
         textArea.append(msg.toString());
     }
 

@@ -35,16 +35,11 @@ Follow this project board to know the latest status of the project: [http://...]
 - What file and target to compile and run. 
 - What is expected to happen when the app start. 
 
-#UML Diagram
+# UML Diagram
+<img width="986" alt="Screenshot 2023-04-10 at 12 41 34 PM" src="https://user-images.githubusercontent.com/60800202/230953823-0fa44d56-f3b6-40e4-b183-e7c0455538ed.png">
 
-
-###Description
+### Description
 This is the UML class diagram for this project. The chat software is focused mainly in the chat controller. 
 Chat controller is what allows the entire project to run. It uses chat view and chat model in an association model that is one to one. 
 Chat view sets up the front end user interface through building a Graphic User Interface with Java Swing and is called once for every call of chat controller.
-Chat view is also associated with Message in a 1 to 1 relationship. Chat view calls message to ensure records of the message, the date, and time are kept as well as allows messages to be set and edited in the front end.  
-ChatController also has a nested private class called sendButtonListener that listens for when the user hits the send button and then is able to move messages from server to client and vice versa. sendButtonListener implements the class ActionListener to do this. 
-Meanwhile, chat model conducts the back end connections between server and client and works to send messages from one to the other. 
-Chat Model has its own nested private class called Client Handler that implements runnable to create threads that read and write the messages for chat model. 
-Chat Model is also called in Server which is a class for setting up the sockets and network programming necessary for this project. Server has a mutual association with Client as they use each other.  
-Lastly, we have one other class called MessageRoom that will be integrated into the main network soon. This class will set up group chats so that multiple clients and servers can talk to each other at once. 
+Chat view is also associated with Message in a 1 to 1 relationship. Chat view calls message to ensure records of the message, the date, and time are kept as well as allows messages to be set and edited in the front end. ChatController also has a nested private class called sendButtonListener that listens for when the user hits the send button and then is able to move messages from server to client and vice versa. sendButtonListener implements the class ActionListener to do this. Meanwhile, chat model conducts the back end connections between server and client and works to send messages from one to the other. Chat Model has its own nested private class called Client Handler that implements runnable to create threads that read and write the messages for chat model. Chat Model is also called in Server which is a class for setting up the sockets and network programming necessary for this project. Server has a mutual association with Client as they use each other. Lastly, we have one other class called MessageRoom that will be integrated into the main network soon. This class will set up group chats so that multiple clients and servers can talk to each other at once. 
