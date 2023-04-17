@@ -12,6 +12,7 @@ public class ChatModel {
     private int port;
     private int maxClients;
     private int numClients;
+    private Server server;
 
     public ChatModel(int port, int maxClients) throws IOException {
         this.port = port;
@@ -21,20 +22,21 @@ public class ChatModel {
     }
 
     public void startServer() {
-        Server server = new Server(port);
+        server = new Server(port);
 
         Thread thread = new Thread(() -> {
             server.startServer();
         });
         thread.start();
-        //server.connectedClients.add(client_1);
     }
 
+    // Could make this into a method to add more clients
     public void startClient(){
         ChatView view = new ChatView();
         view.addSendButtonListener(new SendButtonListener(view));
         Client client = new Client("127.0.0.1", port, view);
 
+        // Each client must run on a separate thread
         Thread Cthread = new Thread(() ->{
             client.newConnection();
         });
@@ -48,7 +50,6 @@ public class ChatModel {
             client_2.newConnection();
         });
         C_2thread.start();
-
     }
 
     private class SendButtonListener implements ActionListener {
