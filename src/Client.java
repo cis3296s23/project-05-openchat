@@ -1,109 +1,71 @@
 // A Java program for a Client
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
- 
+
 public class Client {
     // initialize socket and input output streams
     private Socket socket = null;
-    private DataInputStream input = null;
     private DataOutputStream out = null;
     private int ClientId;
     private static int currentclients = 0;
-    private ArrayList<SerializableSocketAddress> currentClients;
-    public static Server ServerOwner;
-    private int currentTargetGroup;
+    private Server ServerOwner;
+    private String address;
+    private int port;
+    private ChatView view;
 
     // constructor to put ip address and port
-    public Client(String address, int port) throws IOException, ClassNotFoundException {
+    public Client(String address, int port, ChatView view)
+    {
         ClientId = currentclients; //Each client has a unique incremental Idw
         currentclients++;
-        System.out.println(ServerOwner.ServerOpen);
+        ServerOwner = Server.ThisServer;
+        this.address = address;
+        this.port = port;
         // establish a connection
         System.out.println("current clientid:  " + ClientId );
+        this.view = view;
+        view.show();
+    }
+
+    public void newConnection(){
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
 
-            // takes input from terminal
-            input = new DataInputStream(System.in);
- 
             // sends output to the socket
-            out = new DataOutputStream(
-                socket.getOutputStream());
-        }
-        catch (UnknownHostException u) {
-            System.out.println(u);
-            return;
-        }
-        catch (IOException i) {
-            System.out.println(i);
-            return;
-        }
+            out = new DataOutputStream(socket.getOutputStream());
 
-        Thread t = new Thread(new Runnable() {
-            public void run() {
-                String line = "";
+            while(true){
+                // takes input from view
+                String input = view.sentText;
 
-                while (!line.equals("Over")) {
-                    try {
-                        line = input.readLine();
-                        out.writeUTF(line);
-                    }
-                    catch (IOException i) {
-                        System.out.println(i);
-                    }
+                if(!input.isEmpty()){
+                    out.writeUTF(input);
+                    out.flush();
+                    view.sentText = "";
+                }
+                // read input from the server
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                if (in.available() > 0) {
+                    Message response = new Message(in.readUTF(), 1, "Server");
+                    view.appendMessage(response + "\n");
                 }
 
-                // close the connection
-                try {
-                    input.close();
-                    out.close();
-                    socket.close();
-                }
-                catch (IOException i) {
-                    System.out.println(i);
-                }
+                // wait a short amount of time before checking again
+                TimeUnit.MILLISECONDS.sleep(10);
             }
-        });
-        t.start();
-        //Temporary solution VV
-        int[] ar = {1};
-        this.requestGroup(ar);
-        while(true){
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-            Object obj = ois.readObject();
-            if (obj instanceof ArrayList) {
-                ArrayList<SerializableSocketAddress> receivedList = (ArrayList<SerializableSocketAddress>) obj;
-                System.out.println("Received client list");
-                for (SerializableSocketAddress socketAddress : receivedList) {
-                    // do something with socketAddress
-                    System.out.println("Address connected: "+ socketAddress.toInetSocketAddress().getAddress().toString() + " User ID: " + socketAddress.userID );
-                }
-                currentClients= receivedList;
-            }
-          //  ois.close();
+        } catch (IOException | InterruptedException u) {
+            u.printStackTrace();
         }
+    }
 
+    public int getClientId(){
+        return ClientId;
     }
 
     public void requestGroup(int[] targetids){
-       // ServerOwner.requestConnection(ClientId,targetids);
-        //int groupId = Server.createChatRoom();
-       // currentTargetGroup = groupId;
-    }
-
-    public void sendMessage(int groupId){
-
-    }
-
-    public static void main(String args[]) throws InterruptedException, IOException, ClassNotFoundException {
-      //  TimeUnit.SECONDS.sleep(5);
-        Thread.sleep(5000);
-        Client client = new Client("localhost", 25565);
-
+        // ServerOwner.requestConnection(ClientId,targetids);
+        ServerOwner.createChatRoom();
     }
 }
