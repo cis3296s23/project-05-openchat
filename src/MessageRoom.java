@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class MessageRoom {
     int roomId;
-    static int roomCount;
+    static int roomCount = 0;
     String roomName;
     Client[] ConnectedClients;
-    ArrayList<Message> messageStack = new ArrayList<Message>();
+    public ArrayList<Message> messageStack = new ArrayList<Message>();
     public int MessageRoom() {
         roomId = roomCount;
         roomCount++;
