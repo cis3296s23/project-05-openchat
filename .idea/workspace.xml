@@ -4,17 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d76811aa-059a-43aa-881b-0a69f6473c78" name="Changes" comment="Bug fixes and new implementations added. The project now has the ability to connect multiple clients and show each client's corresponding GUI">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="d76811aa-059a-43aa-881b-0a69f6473c78" name="Changes" comment="New versioned files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$SendButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$SendButtonListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,6 +155,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New versioned files" />

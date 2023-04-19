@@ -19,7 +19,7 @@ public class ChatController {
     }
 
     public static void main(String[] args) throws IOException {
-        ChatModel model = new ChatModel(5000, 2);
+        ChatModel model = new ChatModel(888, 3);
         ChatController controller = new ChatController(model);
         controller.startApp();
     }

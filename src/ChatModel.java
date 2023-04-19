@@ -6,9 +6,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
 
 public class ChatModel {
-    private List<Client> clients;
+    private List<Client> clients; //i want to make a map here, client name: identifying address.
     private int port;
     private int maxClients;
     private int numClients;
@@ -25,31 +26,39 @@ public class ChatModel {
         server = new Server(port);
 
         Thread thread = new Thread(() -> {
-            server.startServer();
+            server.startServer(maxClients);
         });
         thread.start();
     }
 
     // Could make this into a method to add more clients
     public void startClient(){
-        ChatView view = new ChatView();
-        view.addSendButtonListener(new SendButtonListener(view));
-        Client client = new Client("127.0.0.1", port, view);
+//creates as many clients as there are inputted in maxclients in ChatController
+        String[] clientNames = new String[maxClients];
+        for(int i=0; i<maxClients; i++){
+            String temp = "Client " + (i+1);
+            clientNames[i] = temp; //put each client name into string array for drop down
+        }
+        for(int i=0; i<maxClients; i++){
+            //create clientID for GUI
+            int UXClientID = i +1;
 
-        // Each client must run on a separate thread
-        Thread Cthread = new Thread(() ->{
-            client.newConnection();
-        });
-        Cthread.start();
+            //remove current client from list of possible clients that you can chat with
+            String[] tempArray = clientNames; //neccessary to repopulate with ALL options
+            List<String> list = new ArrayList<String>(Arrays.asList(tempArray));
+            list.remove(i);
+            tempArray = list.toArray(new String[0]);
 
-        ChatView view2 = new ChatView();
-        view2.addSendButtonListener(new SendButtonListener(view2));
-        Client client_2 = new Client("127.0.0.1", port, view2);
+            ChatView view = new ChatView(UXClientID, tempArray); //pass string array and current client's ID
+            view.addSendButtonListener(new SendButtonListener(view));
+            Client client = new Client("127.0.0.1", port, view);
+            // Each client must run on a separate thread
+            Thread Cthread = new Thread(() ->{ //not currently creating seperate threads
+                client.newConnection();
+            });
+            Cthread.start();
+        }
 
-        Thread C_2thread = new Thread(() ->{
-            client_2.newConnection();
-        });
-        C_2thread.start();
     }
 
     private class SendButtonListener implements ActionListener {

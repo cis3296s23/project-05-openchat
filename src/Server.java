@@ -31,17 +31,19 @@ public class Server extends Thread
 		return status;
 	}
 
-	public void startServer() {
+	public void startServer(int maxClients) {
 		try {
 			server = new ServerSocket(serverPort);
 			System.out.println("Server started");
+			int numClients=0;
+			String[] threadNames = new String[maxClients];
 
-			while (ServerOpen) {
-				//TODO If max clients is reached we can close this loop
+			while (ServerOpen && numClients!=maxClients) {
+				//TODO If max clients is reached we can close this loop - DONE with numClients
 				System.out.println("Waiting for a client ...");
-
 				socket = server.accept();
 				connectedClients.add(socket);
+				numClients++; //stops us from always waiting for more clients
 				System.out.println("Client accepted");
 				Thread t = new Thread(() -> {
 					try{

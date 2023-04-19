@@ -12,15 +12,16 @@ public class ChatView extends JFrame implements ItemListener {
     private final JTextField typeBar = new JTextField(50);
     private final JTextArea textArea = new JTextArea(15, 25);
     public String sentText = "";
+    public String recipientID; //Client 1, Client 2, Client 3
 
 
-    public ChatView(){
+    public ChatView(int UXClientID, String[] clientNames){
         // Setup Window
         textArea.setText("New ChatRoom:\n" );
         //create drop box
 
-        String[] clientNames= {"Client One", "Client Two", "Client Three", "Client Four", "Groupchat"};
         JComboBox<String> userMenu = new JComboBox<String>(clientNames);
+        recipientID = userMenu.getItemAt(0); //sets up initial recipient w/o clicking on dropdown for whichever is displayed
         dropBox = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel labelTwo = new JLabel("Chatting with:   ");
         dropBox.add(labelTwo);
@@ -36,6 +37,9 @@ public class ChatView extends JFrame implements ItemListener {
                 JComboBox<String> userMenu = (JComboBox<String>) e.getSource();
                 String choice = (String) userMenu.getSelectedItem();
                 JOptionPane.showMessageDialog(frame, "You selected to chat with " + choice);
+                //CHANGE RECEIVER HERE
+                recipientID = choice; //String: ex: Client 1
+
                 textArea.setText("New ChatRoom:\n" ); //clear text area for new chat with different person; can be changed to set text to previous sql logging
 
             }
@@ -44,7 +48,7 @@ public class ChatView extends JFrame implements ItemListener {
         buttonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonsPanel.add(typeBar);
         buttonsPanel.add(send);
-        frame.setTitle("Welcome to OpenChat, Client One" );//this will be implemented as a + userName later on once we instantiate userIDs
+        frame.setTitle("Welcome to OpenChat, Client " + UXClientID );//this will be implemented as a + userName later on once we instantiate userIDs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getRootPane().setDefaultButton(send);
 
@@ -88,4 +92,3 @@ public class ChatView extends JFrame implements ItemListener {
 
     }
 }
-//ISSUE: two labels on north are overwriting each other- can only have pne- hopw to fix?
