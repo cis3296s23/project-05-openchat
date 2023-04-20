@@ -16,6 +16,7 @@ public class Server extends Thread
 	public static boolean ServerOpen = false;
 	public static Server ThisServer;
 	private static final HashMap<String,Socket> ConnectedClients = new HashMap<>();
+	public static int clientCount = 0;
 	static final HashMap<Integer,MessageRoom> messageRooms = new HashMap<Integer,MessageRoom>();
 	// constructor with port
 	public Server(int port)
@@ -48,6 +49,7 @@ public class Server extends Thread
 				System.out.println("Waiting for a client ...");
 
 				socket = server.accept();
+				clientCount++;
 				ConnectedClients.put(UUID.randomUUID().toString(),socket);
 
 				updateClientList();
@@ -86,12 +88,33 @@ public class Server extends Thread
 		}
 	}
 
+	public static void updateClientMessageList()throws IOException {
 
-	public static int createChatRoom(){
+
+		for(String clientID: ConnectedClients.keySet()){
+			ArrayList<MessageRoom> roomList = new ArrayList<>();
+
+			for(int roomId: messageRooms.keySet()){
+				MessageRoom targetRoom = messageRooms.get(roomId);
+				if (targetRoom.containsUser(clientID)){
+					roomList.add(targetRoom);
+				}
+			}
+
+
+			Socket socket = ConnectedClients.get(clientID);
+			ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+			oos.writeObject(roomList);
+			//oos.close();
+		}
+	}
+
+	public static int createChatRoom() throws IOException {
 
 		MessageRoom createdRoom = new MessageRoom();
 		messageRooms.put(createdRoom.roomId,createdRoom);
 		System.out.println("room created" + messageRooms.toString());
+		updateClientMessageList();
 		return createdRoom.roomId;
 	};
 
@@ -117,7 +140,7 @@ public class Server extends Thread
 	}
 
 
-	private static boolean processCommand(String commandLine){
+	private static boolean processCommand(String commandLine) throws IOException {
 		boolean commandProccessed = false;
 		//System.out.println("processing-'" +commandLine.toCharArray().toString() );
 		if(commandLine.equals("--CreateRoom")){
