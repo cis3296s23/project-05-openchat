@@ -13,7 +13,11 @@ public class Client {
     private DataOutputStream out = null;
     private int ClientId;
     private static int currentclients = 0;
+<<<<<<< HEAD
     public ArrayList<SerializableSocketAddress> currentClients;
+=======
+    private ArrayList<SerializableSocketAddress> currentClients;
+>>>>>>> 4c4b4df4f461a15af05e0d03fe29edeefa1965b9
     public static Server ServerOwner;
     private int currentTargetGroup;
 

@@ -1,0 +1,240 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Client</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Client (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Client</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.9%
+  </span>
+  <span class="absValue">
+    (29/35)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Client$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28.6%
+  </span>
+  <span class="absValue">
+    (4/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.3%
+  </span>
+  <span class="absValue">
+    (33/49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;// A Java program for a Client
+<i class="no-highlight">2</i>&nbsp;import java.io.*;
+<i class="no-highlight">3</i>&nbsp;import java.lang.reflect.Array;
+<i class="no-highlight">4</i>&nbsp;import java.net.*;
+<i class="no-highlight">5</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">6</i>&nbsp;import java.util.HashMap;
+<i class="no-highlight">7</i>&nbsp;import java.util.concurrent.TimeUnit;
+<i class="no-highlight">8</i>&nbsp; 
+<i class="no-highlight">9</i>&nbsp;public class Client {
+<i class="no-highlight">10</i>&nbsp;    // initialize socket and input output streams
+<b class="fc"><i class="no-highlight">11</i>&nbsp;    private Socket socket = null;</b>
+<b class="fc"><i class="no-highlight">12</i>&nbsp;    private DataInputStream input = null;</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    private DataOutputStream out = null;</b>
+<i class="no-highlight">14</i>&nbsp;    private int ClientId;
+<b class="fc"><i class="no-highlight">15</i>&nbsp;    private static int currentclients = 0;</b>
+<i class="no-highlight">16</i>&nbsp;    public ArrayList&lt;SerializableSocketAddress&gt; currentClients;
+<i class="no-highlight">17</i>&nbsp;    public static Server ServerOwner;
+<i class="no-highlight">18</i>&nbsp;    private int currentTargetGroup;
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;    // constructor to put ip address and port
+<b class="fc"><i class="no-highlight">21</i>&nbsp;    public Client(String address, int port) throws IOException, ClassNotFoundException {</b>
+<b class="fc"><i class="no-highlight">22</i>&nbsp;        ClientId = currentclients; //Each client has a unique incremental Idw</b>
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        currentclients++;</b>
+<b class="fc"><i class="no-highlight">24</i>&nbsp;        System.out.println(ServerOwner.ServerOpen);</b>
+<i class="no-highlight">25</i>&nbsp;        // establish a connection
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        System.out.println(&quot;current clientid:  &quot; + ClientId );</b>
+<i class="no-highlight">27</i>&nbsp;        try {
+<b class="fc"><i class="no-highlight">28</i>&nbsp;            socket = new Socket(address, port);</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;            System.out.println(&quot;Connected&quot;);</b>
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;            // takes input from terminal
+<b class="fc"><i class="no-highlight">32</i>&nbsp;            input = new DataInputStream(System.in);</b>
+<i class="no-highlight">33</i>&nbsp; 
+<i class="no-highlight">34</i>&nbsp;            // sends output to the socket
+<b class="fc"><i class="no-highlight">35</i>&nbsp;            out = new DataOutputStream(</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;                socket.getOutputStream());</b>
+<i class="no-highlight">37</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">38</i>&nbsp;        catch (UnknownHostException u) {</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;            System.out.println(u);</b>
+<i class="no-highlight">40</i>&nbsp;            return;
+<i class="no-highlight">41</i>&nbsp;        }
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        catch (IOException i) {</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;            System.out.println(i);</b>
+<i class="no-highlight">44</i>&nbsp;            return;
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        }</b>
+<i class="no-highlight">46</i>&nbsp;
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        Thread t = new Thread(new Runnable() {</b>
+<i class="no-highlight">48</i>&nbsp;            public void run() {
+<b class="fc"><i class="no-highlight">49</i>&nbsp;                String line = &quot;&quot;;</b>
+<i class="no-highlight">50</i>&nbsp;
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                while (!line.equals(&quot;Over&quot;)) {</b>
+<i class="no-highlight">52</i>&nbsp;                    try {
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                        line = input.readLine();</b>
+<b class="nc"><i class="no-highlight">54</i>&nbsp;                        out.writeUTF(line);</b>
+<i class="no-highlight">55</i>&nbsp;                    }
+<b class="nc"><i class="no-highlight">56</i>&nbsp;                    catch (IOException i) {</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;                        System.out.println(i);</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;                    }</b>
+<i class="no-highlight">59</i>&nbsp;                }
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;                // close the connection
+<i class="no-highlight">62</i>&nbsp;                try {
+<b class="nc"><i class="no-highlight">63</i>&nbsp;                    input.close();</b>
+<b class="nc"><i class="no-highlight">64</i>&nbsp;                    out.close();</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;                    socket.close();</b>
+<i class="no-highlight">66</i>&nbsp;                }
+<b class="nc"><i class="no-highlight">67</i>&nbsp;                catch (IOException i) {</b>
+<b class="nc"><i class="no-highlight">68</i>&nbsp;                    System.out.println(i);</b>
+<b class="nc"><i class="no-highlight">69</i>&nbsp;                }</b>
+<i class="no-highlight">70</i>&nbsp;            }
+<i class="no-highlight">71</i>&nbsp;        });
+<b class="fc"><i class="no-highlight">72</i>&nbsp;        t.start();</b>
+<i class="no-highlight">73</i>&nbsp;        //Temporary solution VV
+<b class="fc"><i class="no-highlight">74</i>&nbsp;        int[] ar = {1};</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        this.requestGroup(ar);</b>
+<i class="no-highlight">76</i>&nbsp;        while(true){
+<b class="fc"><i class="no-highlight">77</i>&nbsp;            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());</b>
+<b class="fc"><i class="no-highlight">78</i>&nbsp;            Object obj = ois.readObject();</b>
+<b class="fc"><i class="no-highlight">79</i>&nbsp;            if (obj instanceof ArrayList) {</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;                ArrayList&lt;SerializableSocketAddress&gt; receivedList = (ArrayList&lt;SerializableSocketAddress&gt;) obj;</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;                System.out.println(&quot;Received client list&quot;);</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;                for (SerializableSocketAddress socketAddress : receivedList) {</b>
+<i class="no-highlight">83</i>&nbsp;                    // do something with socketAddress
+<b class="fc"><i class="no-highlight">84</i>&nbsp;                    System.out.println(&quot;Address connected: &quot;+ socketAddress.toInetSocketAddress().getAddress().toString() + &quot; User ID: &quot; + socketAddress.userID );</b>
+<b class="fc"><i class="no-highlight">85</i>&nbsp;                }</b>
+<b class="fc"><i class="no-highlight">86</i>&nbsp;                currentClients= receivedList;</b>
+<i class="no-highlight">87</i>&nbsp;            }
+<i class="no-highlight">88</i>&nbsp;          //  ois.close();
+<b class="fc"><i class="no-highlight">89</i>&nbsp;        }</b>
+<i class="no-highlight">90</i>&nbsp;
+<i class="no-highlight">91</i>&nbsp;    }
+<i class="no-highlight">92</i>&nbsp;
+<i class="no-highlight">93</i>&nbsp;    public void requestGroup(int[] targetids){
+<i class="no-highlight">94</i>&nbsp;       // ServerOwner.requestConnection(ClientId,targetids);
+<i class="no-highlight">95</i>&nbsp;        //int groupId = Server.createChatRoom();
+<i class="no-highlight">96</i>&nbsp;       // currentTargetGroup = groupId;
+<i class="no-highlight">97</i>&nbsp;    }
+<i class="no-highlight">98</i>&nbsp;
+<i class="no-highlight">99</i>&nbsp;    public void sendMessage(int groupId){
+<i class="no-highlight">100</i>&nbsp;
+<i class="no-highlight">101</i>&nbsp;    }
+<i class="no-highlight">102</i>&nbsp;
+<i class="no-highlight">103</i>&nbsp;    public static void main(String args[]) throws InterruptedException, IOException, ClassNotFoundException {
+<i class="no-highlight">104</i>&nbsp;      //  TimeUnit.SECONDS.sleep(5);
+<b class="nc"><i class="no-highlight">105</i>&nbsp;        Thread.sleep(5000);</b>
+<b class="nc"><i class="no-highlight">106</i>&nbsp;        Client client = new Client(&quot;localhost&quot;, 25565);</b>
+<i class="no-highlight">107</i>&nbsp;
+<i class="no-highlight">108</i>&nbsp;    }
+<i class="no-highlight">109</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-19 22:12</div>
+</div>
+</body>
+</html>
