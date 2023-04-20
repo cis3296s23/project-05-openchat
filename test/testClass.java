@@ -1,5 +1,3 @@
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -10,17 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class testClass {
 
     @Test
-<<<<<<< HEAD
-    public void MultilientConnection() throws InterruptedException{
-=======
-    public void remoteConnect() throws InterruptedException{
-       // Client client1 = new Client("127.0.0.1", 5000);
-        TimeUnit.SECONDS.sleep(5);
-
-    }
-    @Test
-    public void createConnect() throws InterruptedException, IOException, ClassNotFoundException {
->>>>>>> 4c4b4df4f461a15af05e0d03fe29edeefa1965b9
+    public void MultiClientConnection() throws InterruptedException{
         Server thread = new Server(25565);
         thread.start();
 
@@ -39,8 +27,6 @@ class testClass {
             }
         });
         t1.start();
-
-<<<<<<< HEAD
         Thread t2 = new Thread(new Runnable() {
             public void run() {
                 try {
@@ -133,8 +119,8 @@ class testClass {
         TimeUnit.SECONDS.sleep(3);
 
     }
-
-        public void ConnectionEstablished() throws InterruptedException {
+    @Test
+    public void ConnectionEstablished() throws InterruptedException {
         Server thread = new Server(25565);
         thread.start();
 
@@ -153,9 +139,6 @@ class testClass {
             }
         });
         t1.start();
-
-=======
->>>>>>> 4c4b4df4f461a15af05e0d03fe29edeefa1965b9
 
         Thread t2 = new Thread(new Runnable() {
             public void run() {
@@ -183,21 +166,6 @@ class testClass {
         });
         t3.start();
 
-<<<<<<< HEAD
-        TimeUnit.SECONDS.sleep(1);
-=======
-        //TimeUnit.SECONDS.sleep(1);
->>>>>>> 4c4b4df4f461a15af05e0d03fe29edeefa1965b9
-       // Client client2 = new Client("127.0.0.1", 5000);
-
-
-
-<<<<<<< HEAD
-=======
-        while(true){
-            //await input
-        }
->>>>>>> 4c4b4df4f461a15af05e0d03fe29edeefa1965b9
     }
 
 
