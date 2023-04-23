@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.time.*;
 
-public class Message {
+public class Message implements Serializable {
 
     String messageBody;
     long timeOfInitialSend;

@@ -65,8 +65,7 @@ public class ChatView extends JFrame implements ItemListener {
     }
 
     // Update GUI text area
-    public void appendMessage(String message){
-        Message msg = new Message(message,0, "Me");
+    public void appendMessage(Message msg){
         textArea.append(msg.toString());
     }
 

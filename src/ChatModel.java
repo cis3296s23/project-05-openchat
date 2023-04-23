@@ -33,7 +33,7 @@ public class ChatModel {
 
     // Could make this into a method to add more clients
     public void startClient(){
-//creates as many clients as there are inputted in maxclients in ChatController
+        //creates as many clients as there are inputted in maxclients in ChatController
         String[] clientNames = new String[maxClients];
         for(int i=0; i<maxClients; i++){
             String temp = "Client " + (i+1);
@@ -70,8 +70,9 @@ public class ChatModel {
         @Override
         public void actionPerformed(ActionEvent e) {
             String input = view.getInputText();
+            Message msg = new Message(input,0, "Me");
             // Update the view
-            view.appendMessage(input);
+            view.appendMessage(msg);
             view.sentText = input;
             view.clearInputText();
         }

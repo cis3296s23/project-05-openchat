@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 public class Client {
     // initialize socket and input output streams
     private Socket socket = null;
-    private DataOutputStream out = null;
-    private DataInputStream in = null;
+    private ObjectOutputStream out = null;
+    private ObjectInputStream in = null;
     private int ClientId;
     private static int currentclients = 0;
     private Server ServerOwner;
@@ -35,29 +35,41 @@ public class Client {
             System.out.println("Connected");
 
             // sends output to the socket
-            out = new DataOutputStream(socket.getOutputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
+            // start a new thread for reading input from the server
+            Thread handleResponse = new Thread(() ->{
+                getResponse(in);
+            });
+            handleResponse.start();
 
             while(true){
                 // takes input from view
                 String input = view.sentText;
-
                 if(!input.isEmpty()){
-                    out.writeUTF(input);
+                    Message out_msg = new Message(input, this.getClientId(), "Client "
+                            + this.getClientId());
+                    out.writeObject(out_msg);
                     out.flush();
                     view.sentText = "";
                 }
-                // read input from the server
-                in = new DataInputStream(socket.getInputStream());
-                if (in.available() > 0) {
-                    Message response = new Message(in.readUTF(), 1, "Server");
-                    view.appendMessage(response.toString());
-                }
-
                 // wait a short amount of time before checking again
                 TimeUnit.MILLISECONDS.sleep(10);
             }
         } catch (IOException | InterruptedException u) {
             u.printStackTrace();
+        }
+    }
+
+    private void getResponse(ObjectInputStream in){
+        try{
+            while(true){
+                // read input from the server
+                Message response = (Message) in.readObject();
+                view.appendMessage(response);
+            }
+        }catch (IOException | ClassNotFoundException e){
+            e.printStackTrace();
         }
     }
 

@@ -13,7 +13,7 @@ public class Server extends Thread
 	private int serverPort;
 	public boolean ServerOpen = false;
 	public static Server ThisServer;
-	public List<Socket> connectedClients;
+	public HashMap<Socket, ObjectOutputStream> connectedClients;
 	private HashMap<Integer,MessageRoom> messageRooms;
 	// constructor with port
 	public Server(int port)
@@ -22,7 +22,7 @@ public class Server extends Thread
 		ServerOpen = true;
 		serverPort = port;
 		ThisServer = this;
-		connectedClients = new ArrayList<>();
+		connectedClients = new HashMap<>();
 	}
 
 	public boolean isClientConnected(String clientAddress){
@@ -39,10 +39,9 @@ public class Server extends Thread
 			String[] threadNames = new String[maxClients];
 
 			while (ServerOpen && numClients!=maxClients) {
-				//TODO If max clients is reached we can close this loop - DONE with numClients
 				System.out.println("Waiting for a client ...");
 				socket = server.accept();
-				connectedClients.add(socket);
+				connectedClients.put(socket, new ObjectOutputStream(socket.getOutputStream()));
 				numClients++; //stops us from always waiting for more clients
 				System.out.println("Client accepted");
 				Thread t = new Thread(() -> {
@@ -85,27 +84,26 @@ public class Server extends Thread
 	private void handleConnection(Socket socket) {
 		try {
 			// takes input from the client socket
-			DataInputStream in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-			String line = "";
+			Message line = new Message("",0,"");
 
 			// reads message from client until "Over" is sent
-			while (!line.equals("Over")) {
+			while (!line.messageBody.equals("Over")) {
 				try {
-					// TODO relay messages to clients from the client list
-					line = in.readUTF();
-					System.out.println("Server: " + line + " THREAD_ID: " + currentThread());
+					line = (Message) in.readObject();
+					System.out.println("\nServer: " + line.toString() + " THREAD_ID: " + currentThread() +"\n");
 
 					// Send message to all other connected clients
-					for(Socket client : connectedClients){
+					for(Socket client : connectedClients.keySet()){
 						if(client != socket){
-							DataOutputStream out = new DataOutputStream(client.getOutputStream());
-							out.writeUTF(line);
+							ObjectOutputStream out = connectedClients.get(client);
+							out.writeObject(line);
 							out.flush();
 						}
 					}
-				} catch (IOException i) {
-					System.out.println(i);
+				} catch (IOException | ClassNotFoundException e) {
+					e.printStackTrace();
 				}
 			}
 			System.out.println("Closing connection");
