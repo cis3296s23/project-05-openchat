@@ -1,0 +1,1 @@
+java -jar project-05-openchat.jar
