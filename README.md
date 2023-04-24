@@ -14,7 +14,8 @@ This project utilzes Java Sockets to allow for this connection between users. Ou
 rather a chatting application that improves the lives of employees at the work place. We are doing this by adding features such 
 as, editing code snippets inside the chat message in real-time. 
 
-![image](https://user-images.githubusercontent.com/89660661/229372009-312297dc-d0c3-4e5c-a06c-ae6525c91533.png)
+![openchat_Demo](https://user-images.githubusercontent.com/89660661/234086779-7507e53f-9727-406b-a969-7b6deb00c280.png)
+
 
 # How to run
 Currently, the installation of this application is very simple.
