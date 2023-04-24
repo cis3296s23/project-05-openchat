@@ -41,7 +41,11 @@ public class Server extends Thread
 			while (ServerOpen && numClients!=maxClients) {
 				System.out.println("Waiting for a client ...");
 				socket = server.accept();
+
+
 				connectedClients.put(socket, new ObjectOutputStream(socket.getOutputStream()));
+
+
 				numClients++; //stops us from always waiting for more clients
 				System.out.println("Client accepted");
 				Thread t = new Thread(() -> {
@@ -74,7 +78,7 @@ public class Server extends Thread
 	}
 
 	public void sendMessageToRoom(int roomId,int clientId,String message){
-		Message messageObject = new Message(message,clientId, "Me");
+		Message messageObject = new Message(message, clientId,"Me");
 		MessageRoom targetRoom = messageRooms.get(roomId);
 		System.out.println("Sending message: ' " + messageObject.messageBody + " '.");
 
@@ -88,19 +92,34 @@ public class Server extends Thread
 
 			Message line = new Message("",0,"");
 
+
 			// reads message from client until "Over" is sent
 			while (!line.messageBody.equals("Over")) {
 				try {
 					line = (Message) in.readObject();
 					System.out.println("\nServer: " + line.toString() + " THREAD_ID: " + currentThread() +"\n");
-
+					ArrayList<Socket> listOfKeys = new ArrayList<Socket>(connectedClients.keySet()); //puts all the sockets into this thingy
+					System.out.println(listOfKeys);
 					// Send message to all other connected clients
 					for(Socket client : connectedClients.keySet()){
-						if(client != socket){
+						if(ChatView.recipientID==1 && client.equals(listOfKeys.get(0))){ //for client one, get socket at index 0
+							ObjectOutputStream out = connectedClients.get(client);
+							out.writeObject(line);
+							out.flush();
+
+						}else if(ChatView.recipientID==2 && client.equals(listOfKeys.get(2))){ //get socket at index 2 for client two
+							ObjectOutputStream out = connectedClients.get(client);
+							out.writeObject(line);
+							out.flush();
+						}else if(ChatView.recipientID==3 && client.equals(listOfKeys.get(1))){ //if(ChatView.recipientID==3)//get socket at index 1 for client 3
 							ObjectOutputStream out = connectedClients.get(client);
 							out.writeObject(line);
 							out.flush();
 						}
+						//ObjectOutputStream out = connectedClients.get(client);
+						//out.writeObject(line);
+						//out.flush();
+
 					}
 				} catch (IOException | ClassNotFoundException e) {
 					e.printStackTrace();

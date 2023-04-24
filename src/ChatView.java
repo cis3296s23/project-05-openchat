@@ -12,21 +12,23 @@ public class ChatView extends JFrame implements ItemListener {
     private final JTextField typeBar = new JTextField(50);
     private final JTextArea textArea = new JTextArea(15, 25);
     public String sentText = "";
-    public String recipientID; //Client 1, Client 2, Client 3
+    public static int recipientID; //Client 1, Client 2, Client 3
+    public static JComboBox<String> userMenu;
 
 
     public ChatView(int UXClientID, String[] clientNames){
         // Setup Window
         textArea.setText("New ChatRoom:\n" );
         //create drop box
+        userMenu = new JComboBox<String>(clientNames);
+        String boxOutput = userMenu.getItemAt(0);
+        String intBoxOutput = boxOutput.replaceAll("[^0-9]","");
+        recipientID = Integer.parseInt(intBoxOutput);//sets up initial recipient w/o clicking on dropdown for whichever is displayed
 
-        JComboBox<String> userMenu = new JComboBox<String>(clientNames);
-        recipientID = userMenu.getItemAt(0); //sets up initial recipient w/o clicking on dropdown for whichever is displayed
         dropBox = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel labelTwo = new JLabel("Chatting with:   ");
         dropBox.add(labelTwo);
         dropBox.add(userMenu);
-
 
 
         //handle what happens when things are chosen in drop  box
@@ -38,7 +40,8 @@ public class ChatView extends JFrame implements ItemListener {
                 String choice = (String) userMenu.getSelectedItem();
                 JOptionPane.showMessageDialog(frame, "You selected to chat with " + choice);
                 //CHANGE RECEIVER HERE
-                recipientID = choice; //String: ex: Client 1
+                String intBoxOutput = choice.replaceAll("[^0-9]","");
+                recipientID = Integer.parseInt(intBoxOutput);
 
                 textArea.setText("New ChatRoom:\n" ); //clear text area for new chat with different person; can be changed to set text to previous sql logging
 

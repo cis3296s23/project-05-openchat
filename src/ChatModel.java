@@ -14,12 +14,15 @@ public class ChatModel {
     private int maxClients;
     private int numClients;
     private Server server;
+    public static int UXClientID;
+    public static int recipientID;
 
     public ChatModel(int port, int maxClients) throws IOException {
         this.port = port;
         clients = new ArrayList<>();
         this.maxClients = maxClients;
         this.numClients = 0;
+        this.recipientID = recipientID;
     }
 
     public void startServer() {
@@ -41,7 +44,7 @@ public class ChatModel {
         }
         for(int i=0; i<maxClients; i++){
             //create clientID for GUI
-            int UXClientID = i +1;
+            UXClientID = i +1;
 
             //remove current client from list of possible clients that you can chat with
             String[] tempArray = clientNames; //neccessary to repopulate with ALL options
@@ -53,7 +56,7 @@ public class ChatModel {
             view.addSendButtonListener(new SendButtonListener(view));
             Client client = new Client("127.0.0.1", port, view);
             // Each client must run on a separate thread
-            Thread Cthread = new Thread(() ->{ //not currently creating seperate threads
+            Thread Cthread = new Thread(() ->{ //creates seperate threads with same name
                 client.newConnection();
             });
             Cthread.start();

@@ -13,11 +13,11 @@
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,5 +161,15 @@
     <MESSAGE value="New versioned files" />
     <MESSAGE value="New project structure and GUI views added. Need to properly connect the views with each client socket." />
     <option name="LAST_COMMIT_MESSAGE" value="New project structure and GUI views added. Need to properly connect the views with each client socket." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
