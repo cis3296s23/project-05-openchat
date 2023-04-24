@@ -6,6 +6,7 @@ public class SerializableSocketAddress implements Serializable {
     private String hostname;
     private int port;
     public String userID;
+    public String nickName;
 
     public SerializableSocketAddress(InetSocketAddress address,String userID) {
         this.hostname = address.getAddress().getHostAddress();

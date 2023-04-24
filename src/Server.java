@@ -1,68 +1,59 @@
 // A Java program for a Server
-
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.List;
 
 public class Server extends Thread
 {
 	//initialize socket and input stream
 	private Socket		 socket = null;
 	private ServerSocket server = null;
-	private DataInputStream in	 = null;
 	private int serverPort;
-	public static boolean ServerOpen = false;
+	public boolean ServerOpen = false;
 	public static Server ThisServer;
 	private static final HashMap<String,Socket> ConnectedClients = new HashMap<>();
 	public static int clientCount = 0;
+	int maxClients = 5;
 	static final HashMap<Integer,MessageRoom> messageRooms = new HashMap<Integer,MessageRoom>();
+	public HashMap<Socket, ObjectOutputStream> connectedClients;
 	// constructor with port
 	public Server(int port)
 	{
 		// starts server and waits for a connection
 		ServerOpen = true;
 		serverPort = port;
+		ThisServer = this;
+		connectedClients = new HashMap<>();
 	}
 
 	public boolean isClientConnected(String clientAddress){
 		boolean status = false;
 
 		return status;
-	};
+	}
 
 	public void run() {
 		try {
-
-			String publicIp = "localhost"; // replace with your public IP address
-			int port = 25565; // replace with the port you want to listen on
-			InetAddress addr = Inet4Address.getByName(publicIp);
-			System.out.println("Server socket listening on " + InetAddress.getLocalHost().getHostAddress() + ":" + port + "Reachable?:" + addr.isReachable(5) );
-
-			ServerSocket server = new ServerSocket(port);//, 0, addr);
-
-			//server = new ServerSocket(serverPort);
+			server = new ServerSocket(serverPort);
 			System.out.println("Server started");
+			int numClients=0;
 
-			while (ServerOpen) {
+			String[] threadNames = new String[maxClients];
+
+			while (ServerOpen && numClients!=maxClients) {
 				System.out.println("Waiting for a client ...");
-
 				socket = server.accept();
-				clientCount++;
-				ConnectedClients.put(UUID.randomUUID().toString(),socket);
-
-				updateClientList();
-
-				//System.out.println("Client accepted. Current Connected Clients: " + ConnectedClients.toString());
-				Thread t = new Thread(new Runnable() {
-					public void run() {
-						try{
-							handleConnection(socket);
-							socket.close();
-						}catch (IOException i) {
-							System.out.println(i);
-						}
+				connectedClients.put(socket, new ObjectOutputStream(socket.getOutputStream()));
+				numClients++; //stops us from always waiting for more clients
+				System.out.println("Client accepted");
+				Thread t = new Thread(() -> {
+					try{
+						handleConnection(socket);
+						socket.close();
+					}catch (IOException i) {
+						System.out.println(i);
 					}
 				});
 				t.start();
@@ -116,13 +107,11 @@ public class Server extends Thread
 		System.out.println("room created" + messageRooms.toString());
 		updateClientMessageList();
 		return createdRoom.roomId;
-	};
+	}
 
 
 	public boolean requestConnection(int requesterId, int[] clientIds){
 		boolean success = false;
-
-
 		return success;
 	}
 
@@ -155,23 +144,26 @@ public class Server extends Thread
 	private void handleConnection(Socket socket) {
 		try {
 			// takes input from the client socket
-			//System.out.println("Handling the req");
-			in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 
-			String line = "";
+			Message line = new Message("",0,"");
 
 			// reads message from client until "Over" is sent
-			while (!line.equals("Over")) {
+			while (!line.messageBody.equals("Over")) {
 				try {
-					line = in.readUTF();
-					if(!processCommand(line)){
-						sendMessageToRoom(0,0, line);
+					line = (Message) in.readObject();
+					System.out.println("\nServer: " + line.toString() + " THREAD_ID: " + currentThread() +"\n");
 
+					// Send message to all other connected clients
+					for(Socket client : connectedClients.keySet()){
+						if(client != socket){
+							ObjectOutputStream out = connectedClients.get(client);
+							out.writeObject(line);
+							out.flush();
+						}
 					}
-
-					System.out.println(line);
-				} catch (IOException i) {
-					System.out.println(i);
+				} catch (IOException | ClassNotFoundException e) {
+					e.printStackTrace();
 				}
 			}
 			System.out.println("Closing connection");

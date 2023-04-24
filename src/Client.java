@@ -5,105 +5,98 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
- 
+
 public class Client {
     // initialize socket and input output streams
     private Socket socket = null;
-    private DataInputStream input = null;
-    private DataOutputStream out = null;
+    private ObjectOutputStream out = null;
+    private ObjectInputStream in = null;
     private int ClientId;
     private static int currentclients = 0;
+    private Server ServerOwner;
+    private String address;
+    private int port;
+    private ChatView view;
     public ArrayList<SerializableSocketAddress> currentClients;
-    public static Server ServerOwner;
     private int currentTargetGroup;
 
     // constructor to put ip address and port
-    public Client(String address, int port) throws IOException, ClassNotFoundException {
+    public Client(String address, int port, ChatView view)
+    {
         ClientId = currentclients; //Each client has a unique incremental Idw
         currentclients++;
-        System.out.println(ServerOwner.ServerOpen);
+        ServerOwner = Server.ThisServer;
+        this.address = address;
+        this.port = port;
         // establish a connection
         System.out.println("current clientid:  " + ClientId );
+        this.view = view;
+        view.show();
+    }
+
+    public void newConnection(){
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
 
-            // takes input from terminal
-            input = new DataInputStream(System.in);
- 
             // sends output to the socket
-            out = new DataOutputStream(
-                socket.getOutputStream());
-        }
-        catch (UnknownHostException u) {
-            System.out.println(u);
-            return;
-        }
-        catch (IOException i) {
-            System.out.println(i);
-            return;
-        }
+            out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
+            // start a new thread for reading input from the server
+            Thread handleResponse = new Thread(() ->{
+                getResponse(in);
+            });
+            handleResponse.start();
 
-        Thread t = new Thread(new Runnable() {
-            public void run() {
-                String line = "";
-
-                while (!line.equals("Over")) {
-                    try {
-                        line = input.readLine();
-                        out.writeUTF(line);
-                    }
-                    catch (IOException i) {
-                        System.out.println(i);
-                    }
+            while(true){
+                // takes input from view
+                String input = view.sentText;
+                if(!input.isEmpty()){
+                    Message out_msg = new Message(input, this.getClientId(), "Client "
+                            + this.getClientId());
+                    out.writeObject(out_msg);
+                    out.flush();
+                    view.sentText = "";
                 }
-
-                // close the connection
-                try {
-                    input.close();
-                    out.close();
-                    socket.close();
-                }
-                catch (IOException i) {
-                    System.out.println(i);
-                }
+                // wait a short amount of time before checking again
+                TimeUnit.MILLISECONDS.sleep(10);
             }
-        });
-        t.start();
-        //Temporary solution VV
-        int[] ar = {1};
-        this.requestGroup(ar);
-        while(true){
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-            Object obj = ois.readObject();
-            if (obj instanceof ArrayList) {
-                ArrayList<SerializableSocketAddress> receivedList = (ArrayList<SerializableSocketAddress>) obj;
-                System.out.println("Received client list");
-                for (SerializableSocketAddress socketAddress : receivedList) {
-                    // do something with socketAddress
-                    System.out.println("Address connected: "+ socketAddress.toInetSocketAddress().getAddress().toString() + " User ID: " + socketAddress.userID );
-                }
-                currentClients= receivedList;
-            }
-          //  ois.close();
+        } catch (IOException | InterruptedException u) {
+            u.printStackTrace();
         }
+    }
 
+    private void getResponse(ObjectInputStream in){
+        try{
+            while(true){
+                // read input from the server
+               // ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+                Object obj = in.readObject();
+                if (obj instanceof ArrayList) {
+                    ArrayList<SerializableSocketAddress> receivedList = (ArrayList<SerializableSocketAddress>) obj;
+                    System.out.println("Received client list");
+                    for (SerializableSocketAddress socketAddress : receivedList) {
+                        // do something with socketAddress
+                        System.out.println("Address connected: "+ socketAddress.toInetSocketAddress().getAddress().toString() + " User ID: " + socketAddress.userID );
+                    }
+                    currentClients= receivedList;
+                } else{
+                    Message response = (Message) in.readObject();
+                    view.appendMessage(response);
+
+                }
+
+            }
+        }catch (IOException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    public int getClientId(){
+        return ClientId;
     }
 
     public void requestGroup(int[] targetids){
-       // ServerOwner.requestConnection(ClientId,targetids);
-        //int groupId = Server.createChatRoom();
-       // currentTargetGroup = groupId;
-    }
-
-    public void sendMessage(int groupId){
-
-    }
-
-    public static void main(String args[]) throws InterruptedException, IOException, ClassNotFoundException {
-      //  TimeUnit.SECONDS.sleep(5);
-        Thread.sleep(5000);
-        Client client = new Client("localhost", 25565);
-
+        // ServerOwner.requestConnection(ClientId,targetids);
     }
 }
