@@ -43,7 +43,7 @@ public class ChatView extends JFrame implements ItemListener {
                 String intBoxOutput = choice.replaceAll("[^0-9]","");
                 recipientID = Integer.parseInt(intBoxOutput);
 
-                textArea.setText("New ChatRoom:\n" ); //clear text area for new chat with different person; can be changed to set text to previous sql logging
+                //textArea.setText("New ChatRoom:\n" ); //clear text area for new chat with different person; can be changed to set text to previous sql logging
 
             }
         });
