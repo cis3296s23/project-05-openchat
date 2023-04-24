@@ -15,6 +15,7 @@ public class Server extends Thread
 	public static Server ThisServer;
 	public HashMap<Socket, ObjectOutputStream> connectedClients;
 	private HashMap<Integer,MessageRoom> messageRooms;
+	public ArrayList<Socket> listOfKeys;
 	// constructor with port
 	public Server(int port)
 	{
@@ -23,6 +24,7 @@ public class Server extends Thread
 		serverPort = port;
 		ThisServer = this;
 		connectedClients = new HashMap<>();
+		listOfKeys = new ArrayList<>();
 	}
 
 	public boolean isClientConnected(String clientAddress){
@@ -41,7 +43,7 @@ public class Server extends Thread
 			while (ServerOpen && numClients!=maxClients) {
 				System.out.println("Waiting for a client ...");
 				socket = server.accept();
-
+				listOfKeys.add(socket); //puts all the sockets into this thingy in correct order
 
 				connectedClients.put(socket, new ObjectOutputStream(socket.getOutputStream()));
 
@@ -98,20 +100,20 @@ public class Server extends Thread
 				try {
 					line = (Message) in.readObject();
 					System.out.println("\nServer: " + line.toString() + " THREAD_ID: " + currentThread() +"\n");
-					ArrayList<Socket> listOfKeys = new ArrayList<Socket>(connectedClients.keySet()); //puts all the sockets into this thingy
+					//puts all the sockets into this thingy
 					System.out.println(listOfKeys);
 					// Send message to all other connected clients
 					for(Socket client : connectedClients.keySet()){
-						if(ChatView.recipientID==1 && client.equals(listOfKeys.get(0))){ //for client one, get socket at index 0
+						if(ChatView.recipientID == 1 && client.equals(listOfKeys.get(0))){ //for client one, get socket at index 0
 							ObjectOutputStream out = connectedClients.get(client);
 							out.writeObject(line);
 							out.flush();
 
-						}else if(ChatView.recipientID==2 && client.equals(listOfKeys.get(2))){ //get socket at index 2 for client two
+						}else if(ChatView.recipientID == 2 && client.equals(listOfKeys.get(1))){ //get socket at index 2 for client two
 							ObjectOutputStream out = connectedClients.get(client);
 							out.writeObject(line);
 							out.flush();
-						}else if(ChatView.recipientID==3 && client.equals(listOfKeys.get(1))){ //if(ChatView.recipientID==3)//get socket at index 1 for client 3
+						}else if(ChatView.recipientID == 3 && client.equals(listOfKeys.get(2))){ //if(ChatView.recipientID==3)//get socket at index 1 for client 3
 							ObjectOutputStream out = connectedClients.get(client);
 							out.writeObject(line);
 							out.flush();
@@ -134,3 +136,5 @@ public class Server extends Thread
 		}
 	}
 }
+//Problems: clients aren't being added into connected clients in correct order
+//also recipientid isnt updated when clicking on different GUI only if reclicked in box again

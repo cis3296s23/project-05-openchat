@@ -15,14 +15,12 @@ public class ChatModel {
     private int numClients;
     private Server server;
     public static int UXClientID;
-    public static int recipientID;
 
     public ChatModel(int port, int maxClients) throws IOException {
         this.port = port;
         clients = new ArrayList<>();
         this.maxClients = maxClients;
         this.numClients = 0;
-        this.recipientID = recipientID;
     }
 
     public void startServer() {
@@ -75,6 +73,10 @@ public class ChatModel {
             String input = view.getInputText();
             Message msg = new Message(input,0, "Me");
             // Update the view
+            /*String choice = (String) view.userMenu.getSelectedItem();
+            String intBoxOutput = choice.replaceAll("[^0-9]","");
+            ChatView.recipientID = Integer.parseInt(intBoxOutput); //update chatview's selection  when done
+            */
             view.appendMessage(msg);
             view.sentText = input;
             view.clearInputText();

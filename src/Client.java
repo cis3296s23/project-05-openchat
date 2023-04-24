@@ -24,6 +24,7 @@ public class Client {
         this.address = address;
         this.port = port;
         // establish a connection
+        socket = new Socket();
         System.out.println("current clientid:  " + ClientId );
         this.view = view;
         view.show();
