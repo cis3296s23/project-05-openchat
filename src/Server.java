@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class Server extends Thread
 {
@@ -13,9 +14,9 @@ public class Server extends Thread
 	private int serverPort;
 	public boolean ServerOpen = false;
 	public static Server ThisServer;
-	private static final HashMap<String,Socket> ConnectedClients = new HashMap<>();
+	private static HashMap<String,Socket> ConnectedClients = new HashMap<>();
 	public static int clientCount = 0;
-	int maxClients = 5;
+	int maxClients = 3;
 	static final HashMap<Integer,MessageRoom> messageRooms = new HashMap<Integer,MessageRoom>();
 	public HashMap<Socket, ObjectOutputStream> connectedClients;
 	// constructor with port
@@ -45,9 +46,14 @@ public class Server extends Thread
 			while (ServerOpen && numClients!=maxClients) {
 				System.out.println("Waiting for a client ...");
 				socket = server.accept();
-				connectedClients.put(socket, new ObjectOutputStream(socket.getOutputStream()));
+
 				numClients++; //stops us from always waiting for more clients
+				connectedClients.put(socket, new ObjectOutputStream(socket.getOutputStream()));
+				ConnectedClients.put(UUID.randomUUID().toString(), socket);
+
 				System.out.println("Client accepted");
+
+				updateClientList();
 				Thread t = new Thread(() -> {
 					try{
 						handleConnection(socket);
@@ -64,9 +70,11 @@ public class Server extends Thread
 	}
 
 	public static void updateClientList() throws IOException {
+		System.out.println("Updating client lists"+ ConnectedClients.toString() );
 		ArrayList<Serializable> clientMap = new ArrayList<>();
 
 		for(String ID: ConnectedClients.keySet()){
+			System.out.println("Sending over");
 			Socket socket = ConnectedClients.get(ID);
 			clientMap.add(new SerializableSocketAddress((InetSocketAddress)socket.getLocalSocketAddress(),ID));
 		}
@@ -75,6 +83,7 @@ public class Server extends Thread
 			Socket socket = ConnectedClients.get(ID);
 			ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 			oos.writeObject(clientMap);
+			System.out.println("Sending over");
 			//oos.close();
 		}
 	}
@@ -176,14 +185,14 @@ public class Server extends Thread
 	}
 
 	public static void main(String args[]) {
-		Server thread = new Server(25565);
+		Server thread = new Server(888);
 		ThisServer = thread;
 		//thread.start();
 		Server.ThisServer.start();
 		Server.ThisServer.messageRooms.get(1);
-		while(thread.ServerOpen){
+	/*	while(thread.ServerOpen){
 			//await input
-		}
+		}*/
 
 	}
 }

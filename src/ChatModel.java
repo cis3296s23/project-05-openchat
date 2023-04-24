@@ -23,12 +23,14 @@ public class ChatModel {
     }
 
     public void startServer() {
-        server = new Server(port);
+        Server.main(null);
+       // server = new Server(port);
 
         /*Thread thread = new Thread(() -> {
             server.startServer(maxClients);
         });*/
-        server.start();
+      //  server.start();
+
     }
 
     // Could make this into a method to add more clients
@@ -61,7 +63,7 @@ public class ChatModel {
 
     }
 
-    private class SendButtonListener implements ActionListener {
+    class SendButtonListener implements ActionListener {
         public ChatView view;
         public SendButtonListener(ChatView view){
             this.view = view;

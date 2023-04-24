@@ -18,6 +18,8 @@ public class Client {
     private int port;
     private ChatView view;
     public ArrayList<SerializableSocketAddress> currentClients;
+    public ArrayList<String> connectClientIds  = new ArrayList<>();
+
     private int currentTargetGroup;
 
     // constructor to put ip address and port
@@ -70,16 +72,20 @@ public class Client {
         try{
             while(true){
                 // read input from the server
-               // ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-                Object obj = in.readObject();
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+                Object obj = ois.readObject();
+                System.out.println("Got somethign" + obj.getClass());
                 if (obj instanceof ArrayList) {
                     ArrayList<SerializableSocketAddress> receivedList = (ArrayList<SerializableSocketAddress>) obj;
                     System.out.println("Received client list");
                     for (SerializableSocketAddress socketAddress : receivedList) {
                         // do something with socketAddress
+                        connectClientIds.add(socketAddress.userID);
                         System.out.println("Address connected: "+ socketAddress.toInetSocketAddress().getAddress().toString() + " User ID: " + socketAddress.userID );
                     }
                     currentClients= receivedList;
+                    view.userList.removeAllItems();
+                    view.userList.addItem(receivedList);
                 } else{
                     Message response = (Message) in.readObject();
                     view.appendMessage(response);

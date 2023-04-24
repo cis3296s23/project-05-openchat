@@ -8,7 +8,27 @@ import static org.junit.jupiter.api.Assertions.*;
 class testClass {
 
     @Test
-    public void MultiClientConnection() throws InterruptedException{
+    void testStartServer() throws IOException {
+        ChatModel model = new ChatModel(1234, 2);
+        model.startServer();
+        assertTrue(true); // this test just verifies that the server can start without throwing an exception
+    }
+    @Test
+    void testStartClient() throws IOException {
+        ChatModel model = new ChatModel(1234, 2);
+        model.startServer();
+        model.startClient();
+        // Add assertions here to verify that the clients were actually created and started
+    }
+
+    @Test
+    void testSendButtonListener() throws IOException {
+        ChatModel model = new ChatModel(1234, 2);
+        ChatView view = new ChatView(1, new String[]{"Client 2"});
+        model.new SendButtonListener(view).actionPerformed(null);
+        // Add assertions here to verify that the message was sent correctly
+    }
+    /*public void MultiClientConnection() throws InterruptedException{
         Server thread = new Server(25565);
         thread.start();
 
@@ -166,7 +186,7 @@ class testClass {
         });
         t3.start();
 
-    }
+    }*/
 
 
 

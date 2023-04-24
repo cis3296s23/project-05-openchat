@@ -13,7 +13,7 @@ public class ChatView extends JFrame implements ItemListener {
     private final JTextArea textArea = new JTextArea(15, 25);
     public String sentText = "";
     public String recipientID; //Client 1, Client 2, Client 3
-
+    public JComboBox userList;
 
     public ChatView(int UXClientID, String[] clientNames){
         // Setup Window
@@ -26,8 +26,7 @@ public class ChatView extends JFrame implements ItemListener {
         JLabel labelTwo = new JLabel("Chatting with:   ");
         dropBox.add(labelTwo);
         dropBox.add(userMenu);
-
-
+        userList = userMenu;
 
         //handle what happens when things are chosen in drop  box
         String choice = (String) userMenu.getSelectedItem();
@@ -60,7 +59,6 @@ public class ChatView extends JFrame implements ItemListener {
         frame.add(buttonsPanel, BorderLayout.SOUTH);
         //frame.add(send, BorderLayout.SOUTH);
         frame.pack();
-
 
     }
 

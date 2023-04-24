@@ -5,37 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d76811aa-059a-43aa-881b-0a69f6473c78" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$SendButtonListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/SerializableSocketAddress.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ServerChatHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ShutdownSignal.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project-05-openchat.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project-05-openchat.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ChatController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ChatModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ChatView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project-template.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Final/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Final/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$SendButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel$SendButtonListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/MessageRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SerializableSocketAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SerializableSocketAddress.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,8 +61,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Application.ChatController">
+  <component name="RunManager" selected="JUnit.testClass">
     <configuration name="ChatController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ChatController" />
       <module name="project-05-openchat" />
@@ -117,16 +103,33 @@
       <toRun name="Server" type="Application" />
       <method v="2" />
     </configuration>
+    <configuration name="testClass" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project-05-openchat" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="testClass" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="project-05-openchat.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/project-05-openchat.jar" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.Server" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.ChatController" />
       <item itemvalue="Compound.BothRun" />
+      <item itemvalue="JAR Application.project-05-openchat.jar" />
+      <item itemvalue="JUnit.testClass" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.testClass" />
         <item itemvalue="Application.ChatController" />
+        <item itemvalue="JAR Application.project-05-openchat.jar" />
       </list>
     </recent_temporary>
   </component>
