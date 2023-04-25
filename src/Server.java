@@ -47,7 +47,6 @@ public class Server extends Thread
 
 				connectedClients.put(socket, new ObjectOutputStream(socket.getOutputStream()));
 
-
 				numClients++; //stops us from always waiting for more clients
 				System.out.println("Client accepted");
 				Thread t = new Thread(() -> {

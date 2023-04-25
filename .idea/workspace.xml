@@ -9,9 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d76811aa-059a-43aa-881b-0a69f6473c78" name="Changes" comment="New versioned files">
+    <list default="true" id="d76811aa-059a-43aa-881b-0a69f6473c78" name="Changes" comment="Bug fixes and new implementations added. The project now has the ability to connect multiple clients and show each client's corresponding GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/project_05_openchat_jar/project-05-openchat.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project_05_openchat_jar/project-05-openchat.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +116,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="675df1c6-d34c-4d79-9aaa-12513be5d9d9" name="Changes" comment="" />
+      <changelist id="d76811aa-059a-43aa-881b-0a69f6473c78" name="Changes" comment="Bug fixes and new implementations added. The project now has the ability to connect multiple clients and show each client's corresponding GUI" />
       <created>1680545441392</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
