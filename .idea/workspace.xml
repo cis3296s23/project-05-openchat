@@ -11,9 +11,16 @@
   <component name="ChangeListManager">
     <list default="true" id="d76811aa-059a-43aa-881b-0a69f6473c78" name="Changes" comment="New versioned files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/project_05_openchat_jar/project-05-openchat.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/project_05_openchat_jar/project-05-openchat.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/ChatView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Message.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-05-openchat/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ChatModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChatView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChatView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

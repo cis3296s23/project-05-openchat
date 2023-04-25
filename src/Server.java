@@ -104,23 +104,20 @@ public class Server extends Thread
 					System.out.println(listOfKeys);
 					// Send message to all other connected clients
 					for(Socket client : connectedClients.keySet()){
-						if(ChatView.recipientID == 1 && client.equals(listOfKeys.get(0))){ //for client one, get socket at index 0
-							ObjectOutputStream out = connectedClients.get(client);
-							out.writeObject(line);
-							out.flush();
-
-						}else if(ChatView.recipientID == 2 && client.equals(listOfKeys.get(1))){ //get socket at index 2 for client two
-							ObjectOutputStream out = connectedClients.get(client);
-							out.writeObject(line);
-							out.flush();
-						}else if(ChatView.recipientID == 3 && client.equals(listOfKeys.get(2))){ //if(ChatView.recipientID==3)//get socket at index 1 for client 3
-							ObjectOutputStream out = connectedClients.get(client);
-							out.writeObject(line);
-							out.flush();
+						if(ChatView.recipientID == 0){ //if it wants to go to everyone
+							if(client!= socket){ //WHILE GOING THROUGH FOR LOOP, check each client against socket, shoul;d send message to each one except self
+								ObjectOutputStream out = connectedClients.get(client);
+								out.writeObject(line);
+								out.flush();
+							}
 						}
-						//ObjectOutputStream out = connectedClients.get(client);
-						//out.writeObject(line);
-						//out.flush();
+						for(int i=0; i< ChatModel.maxClients; i++){ //run through clients, if it matches the recipient, give them the message
+							if(ChatView.recipientID == i+1 && client.equals(listOfKeys.get(i))){
+								ObjectOutputStream out = connectedClients.get(client);
+								out.writeObject(line);
+								out.flush();
+							}
+						}
 
 					}
 				} catch (IOException | ClassNotFoundException e) {

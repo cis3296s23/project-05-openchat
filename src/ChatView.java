@@ -21,6 +21,7 @@ public class ChatView extends JFrame implements ItemListener {
         textArea.setText("New ChatRoom:\n" );
         //create drop box
         userMenu = new JComboBox<String>(clientNames);
+        userMenu.addItem("Everyone (0)"); //add option to chat with everyone at end of box
         String boxOutput = userMenu.getItemAt(0);
         String intBoxOutput = boxOutput.replaceAll("[^0-9]","");
         recipientID = Integer.parseInt(intBoxOutput);//sets up initial recipient w/o clicking on dropdown for whichever is displayed

@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class ChatModel {
     private List<Client> clients; //i want to make a map here, client name: identifying address.
     private int port;
-    private int maxClients;
+    public static int maxClients;
     private int numClients;
     private Server server;
     public static int UXClientID;
@@ -48,7 +48,7 @@ public class ChatModel {
             String[] tempArray = clientNames; //neccessary to repopulate with ALL options
             List<String> list = new ArrayList<String>(Arrays.asList(tempArray));
             list.remove(i);
-            tempArray = list.toArray(new String[0]);
+            tempArray = list.toArray(new String[0]); //reset temp ARRAY
 
             ChatView view = new ChatView(UXClientID, tempArray); //pass string array and current client's ID
             view.addSendButtonListener(new SendButtonListener(view));
