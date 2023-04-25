@@ -39,7 +39,7 @@ public class Message implements Serializable {
 
     @Override
     public String toString(){
-        return String.format("[%s]\n%s: %s\n", getDate(), userName, messageBody);
+        return String.format("[%s]\n%s: %s\n\n", getDate(), userName, messageBody);
     }
 
 }

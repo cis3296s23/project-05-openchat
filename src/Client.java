@@ -24,6 +24,7 @@ public class Client {
         this.address = address;
         this.port = port;
         // establish a connection
+        socket = new Socket();
         System.out.println("current clientid:  " + ClientId );
         this.view = view;
         view.show();
@@ -48,7 +49,7 @@ public class Client {
                 String input = view.sentText;
                 if(!input.isEmpty()){
                     Message out_msg = new Message(input, this.getClientId(), "Client "
-                            + this.getClientId());
+                            + (this.getClientId() +1) );
                     out.writeObject(out_msg);
                     out.flush();
                     view.sentText = "";

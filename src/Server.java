@@ -15,6 +15,7 @@ public class Server extends Thread
 	public static Server ThisServer;
 	public HashMap<Socket, ObjectOutputStream> connectedClients;
 	private HashMap<Integer,MessageRoom> messageRooms;
+	public ArrayList<Socket> listOfKeys;
 	// constructor with port
 	public Server(int port)
 	{
@@ -23,6 +24,7 @@ public class Server extends Thread
 		serverPort = port;
 		ThisServer = this;
 		connectedClients = new HashMap<>();
+		listOfKeys = new ArrayList<>();
 	}
 
 	public boolean isClientConnected(String clientAddress){
@@ -41,7 +43,11 @@ public class Server extends Thread
 			while (ServerOpen && numClients!=maxClients) {
 				System.out.println("Waiting for a client ...");
 				socket = server.accept();
+				listOfKeys.add(socket); //puts all the sockets into this thingy in correct order
+
 				connectedClients.put(socket, new ObjectOutputStream(socket.getOutputStream()));
+
+
 				numClients++; //stops us from always waiting for more clients
 				System.out.println("Client accepted");
 				Thread t = new Thread(() -> {
@@ -74,7 +80,7 @@ public class Server extends Thread
 	}
 
 	public void sendMessageToRoom(int roomId,int clientId,String message){
-		Message messageObject = new Message(message,clientId, "Me");
+		Message messageObject = new Message(message, clientId,"Me");
 		MessageRoom targetRoom = messageRooms.get(roomId);
 		System.out.println("Sending message: ' " + messageObject.messageBody + " '.");
 
@@ -88,19 +94,31 @@ public class Server extends Thread
 
 			Message line = new Message("",0,"");
 
+
 			// reads message from client until "Over" is sent
 			while (!line.messageBody.equals("Over")) {
 				try {
 					line = (Message) in.readObject();
 					System.out.println("\nServer: " + line.toString() + " THREAD_ID: " + currentThread() +"\n");
-
+					//puts all the sockets into this thingy
+					System.out.println(listOfKeys);
 					// Send message to all other connected clients
 					for(Socket client : connectedClients.keySet()){
-						if(client != socket){
-							ObjectOutputStream out = connectedClients.get(client);
-							out.writeObject(line);
-							out.flush();
+						if(ChatView.recipientID == 0){ //if it wants to go to everyone
+							if(client!= socket){ //WHILE GOING THROUGH FOR LOOP, check each client against socket, shoul;d send message to each one except self
+								ObjectOutputStream out = connectedClients.get(client);
+								out.writeObject(line);
+								out.flush();
+							}
 						}
+						for(int i=0; i< ChatModel.maxClients; i++){ //run through clients, if it matches the recipient, give them the message
+							if(ChatView.recipientID == i+1 && client.equals(listOfKeys.get(i))){
+								ObjectOutputStream out = connectedClients.get(client);
+								out.writeObject(line);
+								out.flush();
+							}
+						}
+
 					}
 				} catch (IOException | ClassNotFoundException e) {
 					e.printStackTrace();
@@ -115,3 +133,5 @@ public class Server extends Thread
 		}
 	}
 }
+//Problems: clients aren't being added into connected clients in correct order
+//also recipientid isnt updated when clicking on different GUI only if reclicked in box again

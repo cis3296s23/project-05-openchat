@@ -11,9 +11,10 @@ import java.util.Arrays;
 public class ChatModel {
     private List<Client> clients; //i want to make a map here, client name: identifying address.
     private int port;
-    private int maxClients;
+    public static int maxClients;
     private int numClients;
     private Server server;
+    public static int UXClientID;
 
     public ChatModel(int port, int maxClients) throws IOException {
         this.port = port;
@@ -41,19 +42,19 @@ public class ChatModel {
         }
         for(int i=0; i<maxClients; i++){
             //create clientID for GUI
-            int UXClientID = i +1;
+            UXClientID = i +1;
 
             //remove current client from list of possible clients that you can chat with
             String[] tempArray = clientNames; //neccessary to repopulate with ALL options
             List<String> list = new ArrayList<String>(Arrays.asList(tempArray));
             list.remove(i);
-            tempArray = list.toArray(new String[0]);
+            tempArray = list.toArray(new String[0]); //reset temp ARRAY
 
             ChatView view = new ChatView(UXClientID, tempArray); //pass string array and current client's ID
             view.addSendButtonListener(new SendButtonListener(view));
             Client client = new Client("127.0.0.1", port, view);
             // Each client must run on a separate thread
-            Thread Cthread = new Thread(() ->{ //not currently creating seperate threads
+            Thread Cthread = new Thread(() ->{ //creates seperate threads with same name
                 client.newConnection();
             });
             Cthread.start();
@@ -72,6 +73,10 @@ public class ChatModel {
             String input = view.getInputText();
             Message msg = new Message(input,0, "Me");
             // Update the view
+            /*String choice = (String) view.userMenu.getSelectedItem();
+            String intBoxOutput = choice.replaceAll("[^0-9]","");
+            ChatView.recipientID = Integer.parseInt(intBoxOutput); //update chatview's selection  when done
+            */
             view.appendMessage(msg);
             view.sentText = input;
             view.clearInputText();
