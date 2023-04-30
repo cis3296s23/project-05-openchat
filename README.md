@@ -19,11 +19,13 @@ as, editing code snippets inside the chat message in real-time.
 
 # How to run
 Currently, the installation of this application is very simple.
-  - First fork / clone the repo to your local Java IDE (Preferrably Intellij)
-  - Once you have access to all the files you can then simply run (main) the server first (This is done since client will terminate without a server connection available)
-  - Then run the main method of the client file
-  - You can now check your terminal at the bottom of your screen, you should see two terminals (Server, Client)
-  - Once this is established you can simply type messages back and forth to Server & Client (String "Over" ends the process)
+  - First download the .jar file located within the main branch
+  - If you are on windows you must also download the .bat file and run first
+  - You must have the latest version of Java installed within your PC
+ - Java Windows Download - https://www.java.com/download/ie_manual.jsp
+ - Java Mac Download - https://www.java.com/en/download/apple.jsp
+ - Once run it will pop-up with three windows that you can use to communicate between different clients
+  
 
 # How to contribute
 Follow this project board to know the latest status of the project: [http://...]([http://...])  
