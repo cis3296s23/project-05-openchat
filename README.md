@@ -28,7 +28,7 @@ Currently, the installation of this application is very simple.
   
 
 # How to contribute
-Follow this project board to know the latest status of the project: [http://...]([http://...])  
+Follow this project board to know the latest status of the project: https://github.com/orgs/cis3296s23/projects/65
 
 ### How to build
 - Clone this github repository: ... 
