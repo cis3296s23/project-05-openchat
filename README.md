@@ -30,7 +30,7 @@ Follow this project board to know the latest status of the project: [http://...]
 
 ### How to build
 - Clone this github repository: ... 
-- Specify what branch to use for a more stable release or for cutting edge development.  
+- Use the main branch as it is the most up-to-date  
 - Use InteliJ 11
 - Specify additional library to download if needed 
 - Set your JDK to run on ChatController as this is the main function
