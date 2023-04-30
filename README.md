@@ -29,12 +29,12 @@ Currently, the installation of this application is very simple.
 Follow this project board to know the latest status of the project: [http://...]([http://...])  
 
 ### How to build
-- Use this github repository: ... 
+- Clone this github repository: ... 
 - Specify what branch to use for a more stable release or for cutting edge development.  
 - Use InteliJ 11
 - Specify additional library to download if needed 
-- What file and target to compile and run. 
-- What is expected to happen when the app start. 
+- Set your JDK to run on ChatController as this is the main function
+- When running the default is set to 3 chat windows, you can change this within ChatController, Simply move the windows to see all of them 
 
 # UML Diagram
 
